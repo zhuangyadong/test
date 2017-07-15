@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		
+		#div1 div{
+			display: none;
+			width: 200px;
+			height: 200px;
+			border: 1px solid #ccc;
+
+		}
+		.active{
+			background: #ccc;
+			color: #fff;
+		}
+	</style>
+	<script>
+		/*window.onload = function(){
+			var box = document.getElementById('div1');
+			var inp = box.getElementsByTagName('input');
+			var aDiv = box.getElementsByTagName('div');
+			for(var i = 0;i<inp.length;i++){
+				inp[i].index = i;
+				inp[i].onclick = function(){
+					for (var i = 0; i < inp.length; i++) {
+						inp[i].className = '';
+						aDiv[i].style.display = 'none';
+					}
+					this.className = 'active';
+					aDiv[this.index].style.display = 'block';
+				}
+			}
+		}*/
+	// 先变型：
+	//尽量不要函数嵌套函数
+	//可以有全局变量
+	//把onload中不是赋值的语句放到单独的函数中
+
+		var box = null;
+		var inp = null;
+		var aDiv = null;
+		window.onload = function(){
+			box = document.getElementById('div1');
+			inp = box.getElementsByTagName('input');
+			aDiv = box.getElementsByTagName('div');
+			
+			init();
+		};
+
+		function init(){
+			for(var i = 0;i<inp.length;i++){
+				inp[i].index = i;
+				inp[i].onclick = change;
+			}
+		}
+		function change(){
+				for (var i = 0; i < inp.length; i++) {
+					inp[i].className = '';
+					aDiv[i].style.display = 'none';
+				}
+				this.className = 'active';
+				aDiv[this.index].style.display = 'block';
+			}
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<input class="active" type="button" value="1">
+		<input type="button" value="2">
+		<input type="button" value="3">
+		<div style="display: block">111</div>
+		<div>222</div>
+		<div>333</div>
+	</div>
+</body>
+</html>
